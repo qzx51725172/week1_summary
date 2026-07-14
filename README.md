@@ -1,6 +1,9 @@
 # week1-data-project
 ## 功能
-读取本地CSV成绩表格，计算分数均值、最大/最小值，筛选及格人员，将全部统计结果导出为JSON文件。
+读取本地CSV成绩表格
+1. 计算分数均值、最大/最小值，筛选及格人员
+2. 分布统计：单个分数出现频次、成绩区间人数分布（不及格 / 中等 / 优秀）；
+将全部统计结果导出为JSON文件。
 
 ## 运行环境
 Python 3.10
@@ -10,9 +13,16 @@ Python 3.10
 1. 在项目根目录新建 `data` 文件夹；
 2. 将成绩CSV文件命名为 `dataplus.csv`，放入 `data/` 文件夹内；
 3. CSV表头固定为「姓名,分数」，否则代码读取字段会报错。
+项目标准目录结构
+week1-data-project/       # 项目根目录
+├─ main.py                # 主处理脚本
+├─ result.json            # 程序运行后自动生成的输出文件
+├─ README.md              # 本说明文档
+└─ data/                  # 数据源文件夹
+   └─ dataplus.csv        # 成绩原始CSV表格
 
 ## 切换项目根目录
-打开 Git Bash ，切换到本项目根目录 week1-data-project，所有命令均在此目录执行。
+打开 Git Bash ，cd C:\Users\asus\git-test\week1-data-project，所有命令均在此目录执行。
 
 ## 依赖安装与脚本运行命令
 激活 py310 虚拟环境后，执行命令安装依赖：
@@ -23,7 +33,7 @@ pip install pandas
 ```bash
 python main.py
 ```
-
+(其余解析已基本写在py文件具体位置了)
 ## 导出JSON文件部分代码解析
 ```python
 with open("./result.json", "w", encoding="utf-8") as f:

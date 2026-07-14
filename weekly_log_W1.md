@@ -87,6 +87,37 @@ GitHub 网页无法正常打开、加载。
 ## 解决方法
 后台运行 Watt Toolkit 工具，开启 GitHub 网络加速后，网页可正常访问与操作。
 
+# 第4天：国内合规平替 Google Colab 免费 GPU 运行
+## 实训目标
+使用百度飞桨 AI Studio：新建 Notebook、切换免费 GPU 算力，运行代码打印 GPU 硬件信息，验证显卡可用。
+
+## 操作过程
+1. 飞桨 AI Studio 官网aistudio.baidu.com。
+2. 点击右上角「创建项目」，项目名称填写Day4-GPU测试实验，Notebook 版本选择BML Codelab（唯一支持免费 GPU 的版本），IDE 默认 JupyterLab，其余配置留空，点击创建。
+3. 进入项目 Notebook 页面，右上角初始硬件标识为 CPU，点击 CPU 按钮弹出「切换环境」面板；免费资源分类下选择V100 32GB免费 GPU 实例，点击确定重启算力环境，等待加载完成。
+4. 页面底部点击「代码」新建代码单元格，先尝试 PyTorch 检测代码，环境无 torch 库导入报错；更换飞桨原生 Paddle 代码，执行 GPU 硬件检测。
+5. 代码正常运行，成功输出 CUDA 可用状态、GPU 型号、显存容量，完成免费 GPU 连通验证；可选操作：进入数据集市场添加公开数据集，对标 Kaggle 数据集下载使用流程。
+
+## 运行截图
+![百度飞桨 AI GPU运行结果](./img/day4_result.png)
+## Python 检测源码
+```python
+import paddle
+# 检测当前GPU硬件信息，对标Colab打印显卡需求
+print("CUDA是否可用：", paddle.is_compiled_with_cuda())
+if paddle.is_compiled_with_cuda():
+    print("GPU型号：", paddle.device.get_device())
+    gpu_info = paddle.device.cuda.get_device_properties(0)
+    print(f"GPU总显存：{gpu_info.total_memory / (1024**3):.2f} GB")
+```
+
+## 遇到问题
+创建项目后默认启动 CPU 环境，找不到 GPU 切换入口，无法调用显卡算力。
+最初使用 torch 检测代码执行时报错：Cannot run import torch because of system compatibility，平台预装 Paddle，未自带 PyTorch 库。
+## 解决方法
+切换 GPU 入口在 Notebook 页面右上角 CPU 标识按钮，点击即可弹出算力切换面板；仅 BML Codelab 版本支持 GPU，AI Studio 经典版仅能使用 CPU。
+放弃 PyTorch 代码，使用平台原生 Paddle 框架编写 GPU 检测代码，无需额外安装依赖，直接运行。
+
 # 第5天：注册1个免费LLM API（智谱清言）
 ## 实训目标
 成功注册并获取API Key（本地妥善保存，不要公开）。
