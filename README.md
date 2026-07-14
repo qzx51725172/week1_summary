@@ -33,7 +33,7 @@ pip install pandas
 ```bash
 python main.py
 ```
-(其余解析已基本写在py文件具体位置了)
+(其余解析已基本写在py文件对应的具体位置了)
 ## 导出JSON文件部分代码解析
 ```python
 with open("./result.json", "w", encoding="utf-8") as f:
