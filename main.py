@@ -6,7 +6,7 @@ import json
 data = pd.read_csv("./data/dataplus.csv", encoding="utf-8", usecols=["姓名", "分数"])
 score = data["分数"]
 
-# 单个分数出现次数统计，将 pandas 统计表格转为普通 Python 字典，适配 JSON 导出格式
+# 单个分数出现次数统计，将 pandas 统计表格转为普通 Python 字典，适配 JSON 导出格式。
 count = data["分数"].value_counts().to_dict()
 # 成绩分段，将连续分数划分为离散档位，在原表格新增一列，存储每条数据对应的成绩档位；统计每个档位的总人数，转为字典
 bins = [0, 59, 79, 100]
